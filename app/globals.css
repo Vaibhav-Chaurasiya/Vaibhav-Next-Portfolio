@@ -1,0 +1,207 @@
+@import url("https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===============================
+   THEME TOKENS (Dark by default)
+================================ */
+:root {
+  --bg: #030014;
+  --bg2: #020617;
+
+  --text: rgba(255, 255, 255, 0.92);
+  --muted: rgba(255, 255, 255, 0.70);
+
+  --card: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.12);
+
+  /* Accent colors */
+  --primary: #7c3aed;   /* violet */
+  --accent: #22d3ee;    /* cyan */
+  --secondary: #a78bfa; /* soft violet */
+}
+
+/* ===============================
+   LIGHT THEME OVERRIDES
+================================ */
+html.light {
+  --bg: #f6f7fb;
+  --bg2: #eef2ff;
+
+  --text: rgba(10, 16, 32, 0.92);
+  --muted: rgba(10, 16, 32, 0.65);
+
+  --card: rgba(0, 0, 0, 0.04);
+  --border: rgba(0, 0, 0, 0.10);
+}
+
+/* ===============================
+   BASE STYLES
+================================ */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--text);
+
+  /* Cinematic background that works on BOTH themes */
+  background:
+    radial-gradient(
+      1100px 560px at 20% 10%,
+      rgba(124, 58, 237, 0.18),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 500px at 80% 20%,
+      rgba(34, 211, 238, 0.16),
+      transparent 55%
+    ),
+    radial-gradient(
+      800px 450px at 50% 85%,
+      rgba(167, 139, 250, 0.12),
+      transparent 60%
+    ),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+}
+
+/* selection */
+::selection {
+  background: rgba(34, 211, 238, 0.25);
+}
+
+/* ===============================
+   CUSTOM UTILITY CLASSES
+================================ */
+.cursive {
+  font-family: "Cedarville Cursive", cursive;
+}
+
+/* Gradient text */
+.Welcome-text {
+  background: linear-gradient(
+    90deg,
+    var(--primary) 0%,
+    var(--accent) 45%,
+    var(--secondary) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Glass badge / box */
+.Welcome-box {
+  isolation: isolate;
+  overflow: hidden;
+  align-items: center;
+  display: flex;
+  width: -moz-max-content;
+
+  border-radius: 999px;
+  padding: 10px 16px;
+
+  background: var(--card);
+  border: 1px solid var(--border);
+
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 12px 40px rgba(0, 0, 0, 0.35);
+
+  transition: 0.35s ease;
+}
+
+.Welcome-box:hover {
+  border-color: rgba(34, 211, 238, 0.25);
+  box-shadow:
+    0 0 0 1px rgba(34, 211, 238, 0.10),
+    0 18px 60px rgba(0, 0, 0, 0.45);
+}
+
+/* Primary button */
+.button-primary {
+  background:
+    radial-gradient(
+      120% 150% at 20% 20%,
+      rgba(34, 211, 238, 0.22),
+      transparent 45%
+    ),
+    radial-gradient(
+      120% 150% at 80% 30%,
+      rgba(124, 58, 237, 0.22),
+      transparent 50%
+    ),
+    rgba(255, 255, 255, 0.04);
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 16px 50px rgba(0, 0, 0, 0.35);
+
+  transition: 0.25s ease;
+}
+
+.button-primary:hover {
+  transform: translateY(-1px);
+  border-color: rgba(34, 211, 238, 0.28);
+
+  box-shadow:
+    0 0 0 1px rgba(34, 211, 238, 0.10),
+    0 18px 60px rgba(0, 0, 0, 0.45);
+}
+
+/* ===============================
+   SCROLLBAR
+================================ */
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    rgba(34, 211, 238, 0.55),
+    rgba(124, 58, 237, 0.55)
+  );
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(34, 211, 238, 0.85),
+    rgba(124, 58, 237, 0.85)
+  );
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+/* Theme helpers */
+.t-text {
+  color: var(--text);
+}
+.t-muted {
+  color: var(--muted);
+}
+.t-card {
+  background: var(--card);
+}
+.t-border {
+  border-color: var(--border);
+}
