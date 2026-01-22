@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import HeroContent from "../sub/HeroContent";
 
@@ -7,36 +5,28 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative w-full min-h-screen overflow-hidden"
+      className="relative w-full min-h-[92vh] flex items-center overflow-hidden"
     >
-      {/* ✅ Soft blackhole video layer (blended) */}
+      {/* ✅ Background Video (soft so stars visible) */}
       <video
         autoPlay
         muted
         loop
         playsInline
-        preload="metadata"
-        className="
-          absolute inset-0 w-full h-full object-cover
-          opacity-35 blur-[1px]
-          mix-blend-screen
-          pointer-events-none
-        "
+        preload="auto"
+        className="absolute inset-0 w-full h-full object-cover opacity-[0.55] saturate-150"
       >
         <source src="/blackhole.webm" type="video/webm" />
       </video>
 
-      {/* ✅ Gradient overlay so it merges with page background */}
-      <div
-        className="
-          absolute inset-0 pointer-events-none
-          bg-gradient-to-b
-          from-black/20 via-black/30 to-black/70
-        "
-      />
+      {/* ✅ Soft aurora tint (NOT DARK overlay) */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[rgba(3,0,20,0.10)]" />
 
-      {/* ✅ Hero content */}
-      <div className="relative z-10">
+      {/* ✅ Smooth merge to next section (no gap line) */}
+      <div className="absolute -bottom-1 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-transparent pointer-events-none" />
+
+      {/* Content */}
+      <div className="relative z-10 w-full">
         <HeroContent />
       </div>
     </section>

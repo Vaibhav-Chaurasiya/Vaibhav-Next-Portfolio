@@ -21,11 +21,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} overflow-x-hidden`}>
+      <body className={`${inter.className} overflow-x-hidden w-full`}>
         <Providers>
           <StarsCanvas />
           <Navbar />
-          <div className="w-full">{children}</div>
+          <main className="w-full">{children}</main>
           <Footer />
         </Providers>
       </body>
