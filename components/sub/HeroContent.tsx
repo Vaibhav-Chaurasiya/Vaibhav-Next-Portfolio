@@ -35,8 +35,8 @@ const HeroContent: React.FC = () => {
   // Professional phrases (your profile)
   const phrases = useMemo(
     () => [
-      "Full Stack Web Developer",
-      "Next.js + MERN Specialist",
+      "Full Stack Web Projects",
+      "Next.js + MERN Learner",
       "SEO-Optimized Websites",
       "AI & GenAI Integrations",
       "Clean UI/UX + Scalable Code",
