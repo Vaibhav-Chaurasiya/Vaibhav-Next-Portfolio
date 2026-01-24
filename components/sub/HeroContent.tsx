@@ -1,44 +1,57 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { RiExternalLinkLine, RiMailLine, RiCodeSSlashLine, RiSparklingFill } from "react-icons/ri";
+import {
+  RiExternalLinkLine,
+  RiMailLine,
+  RiCodeSSlashLine,
+  RiSparklingFill,
+} from "react-icons/ri";
 
-const HeroContent = () => {
+const HeroContent: React.FC = () => {
   const [inView, setInView] = useState(false);
-  const heroRef = useRef(null);
-  
+  const heroRef = useRef<HTMLElement | null>(null);
+
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  
+
   const rotateX = useSpring(useTransform(mouseY, [-300, 300], [2, -2]), {
     stiffness: 150,
-    damping: 20
+    damping: 20,
   });
+
   const rotateY = useSpring(useTransform(mouseX, [-300, 300], [-2, 2]), {
     stiffness: 150,
-    damping: 20
+    damping: 20,
   });
 
   useEffect(() => {
+    const node = heroRef.current;
+    if (!node) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => setInView(entry.isIntersecting),
       { threshold: 0.25 }
     );
-    if (heroRef.current) observer.observe(heroRef.current);
+
+    observer.observe(node);
     return () => observer.disconnect();
   }, []);
 
-  const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    mouseX.set(e.clientX - rect.left - rect.width / 2);
-    mouseY.set(e.clientY - rect.top - rect.height / 2);
-  };
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      mouseX.set(e.clientX - rect.left - rect.width / 2);
+      mouseY.set(e.clientY - rect.top - rect.height / 2);
+    },
+    [mouseX, mouseY]
+  );
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = useCallback(() => {
     mouseX.set(0);
     mouseY.set(0);
-  };
+  }, [mouseX, mouseY]);
 
   return (
     <section
@@ -95,18 +108,16 @@ const HeroContent = () => {
             <div className="h-40 w-96 rounded-full bg-[var(--primary)]/20 blur-3xl" />
           </div>
 
-          <motion.h1 
+          <motion.h1
             className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[1.1] t-text"
-            style={{ 
+            style={{
               perspective: "1000px",
-              transformStyle: "preserve-3d"
+              transformStyle: "preserve-3d",
             }}
           >
-            <motion.span 
-              className="block mb-2"
-              style={{ rotateX, rotateY }}
-            >
-              <span className="inline-block">Hi, I'm </span>
+            <motion.span className="block mb-2" style={{ rotateX, rotateY }}>
+              <span className="inline-block">Hi, I&apos;m </span>
+
               <span className="relative inline-block">
                 {/* Multi-layer shadow effect */}
                 <span
@@ -129,7 +140,7 @@ const HeroContent = () => {
               </span>
             </motion.span>
 
-            <motion.span 
+            <motion.span
               className="block text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary)] to-[var(--accent)]"
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -157,7 +168,7 @@ const HeroContent = () => {
             </span>
           </h2>
           <p className="text-xl sm:text-2xl t-muted font-light">
-            Fast, clean & scalable
+            Fast, clean &amp; scalable
           </p>
         </motion.div>
 
@@ -168,9 +179,9 @@ const HeroContent = () => {
           transition={{ delay: 0.8 }}
           className="text-base sm:text-lg leading-relaxed max-w-3xl mx-auto t-muted mb-10"
         >
-          I craft performance-first interfaces with modern motion, SEO-ready structure, 
-          and production-grade architecture. Specialized in building clean UI systems, 
-          reusable components, and seamless user experiences.
+          I craft performance-first interfaces with modern motion, SEO-ready
+          structure, and production-grade architecture. Specialized in building
+          clean UI systems, reusable components, and seamless user experiences.
         </motion.p>
 
         {/* Feature Pills */}
@@ -273,7 +284,7 @@ const HeroContent = () => {
             className="px-8 py-4 rounded-xl border-2 t-border t-card backdrop-blur-md font-bold t-text hover:border-[var(--primary)] transition-all flex items-center gap-2"
           >
             <RiMailLine className="text-xl" />
-            Let's Connect
+            Let&apos;s Connect
           </motion.a>
         </motion.div>
 
