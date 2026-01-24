@@ -4,7 +4,6 @@ import "./globals.css";
 import StarsCanvas from "@/components/main/StarBackground";
 import Navbar from "@/components/main/Navbar";
 import Footer from "@/components/main/Footer";
-import Providers from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,14 +19,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} overflow-x-hidden w-full`}>
-        <Providers>
-          <StarsCanvas />
-          <Navbar />
-          <main className="w-full">{children}</main>
-          <Footer />
-        </Providers>
+    <html lang="en">
+      <body className={`${inter.className} bg-[#030014] overflow-x-hidden`}>
+        <StarsCanvas />
+        <Navbar />
+        <div className="w-full">{children}</div>
+        <Footer />
       </body>
     </html>
   );

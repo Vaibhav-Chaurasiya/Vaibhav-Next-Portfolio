@@ -3,7 +3,6 @@
 import React from "react";
 import { Socials } from "@/constants";
 import Image from "next/image";
-import ThemeToggle from "@/components/ui/ThemeToggle";
 
 const Navbar = () => {
   return (
@@ -20,6 +19,7 @@ const Navbar = () => {
                   width={40}
                   height={40}
                   className="w-8 h-8 object-contain"
+                  priority
                 />
               </div>
 
@@ -63,8 +63,6 @@ const Navbar = () => {
 
             {/* Right */}
             <div className="flex items-center gap-3">
-              <ThemeToggle />
-
               {Socials.map((social) => (
                 <a
                   href={social.link}
